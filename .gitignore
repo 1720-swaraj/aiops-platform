@@ -1,0 +1,17 @@
+# Secrets & environment files
+.env
+.env.*
+*.pem
+*.key
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# Python / Node / OS
+__pycache__/
+.venv/
+node_modules/
+.DS_Store

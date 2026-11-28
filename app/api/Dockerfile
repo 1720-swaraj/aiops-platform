@@ -11,6 +11,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # ---- Stage 2: Runtime (minimal, non-root final image) ----
 FROM python:3.13-slim-trixie AS runtime
 
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    rm -rf /var/lib/apt/lists/*
+
 # Create a non-root user and group (UID 10001)
 RUN groupadd -g 10001 appgroup && \
     useradd -u 10001 -g appgroup -s /sbin/nologin appuser

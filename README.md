@@ -96,5 +96,5 @@ End-to-end DevOps / SRE portfolio project running at **$0 cost** on a local WSL2
 ## Progress Tracker
 - [x] **Phase 0:** WSL2 (4 GB cap), native Docker Engine, repo setup, Gitleaks pre-commit + GitHub Actions CI
 - [x] **Phase 1 (Part 1):** FastAPI `api` service, multi-stage non-root `Dockerfile`, local Trivy scan
-- [ ] **Phase 1 (Part 2 — Next Session):** Automate build, Trivy security gate, and push to GHCR via GitHub Actions
-- [ ] **Phase 2:** Local Kubernetes (`k3d`)
+- [x] **Phase 1 (Part 2):** Automate build, Trivy security gate, and push to GHCR via GitHub Actions
+- [ ] **Phase 2 (Next):** Local Kubernetes (`k3d`)

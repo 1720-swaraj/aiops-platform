@@ -26,6 +26,15 @@ COPY --from=builder /opt/venv /opt/venv
 COPY --chown=appuser:appgroup main.py .
 
 ENV PATH="/opt/venv/bin:$PATH"
+# Remove packaging tools and bundled wheels not needed at runtime
+RUN rm -rf \
+    /opt/venv/lib/python*/site-packages/pip* \
+    /opt/venv/lib/python*/site-packages/setuptools* \
+    /opt/venv/bin/pip* \
+    /usr/local/lib/python*/site-packages/pip* \
+    /usr/local/lib/python*/site-packages/setuptools* \
+    /usr/local/lib/python*/ensurepip \
+    /usr/local/bin/pip*
 USER appuser
 
 EXPOSE 8000

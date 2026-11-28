@@ -37,11 +37,11 @@ jobs:
 
       - name: Log in to GitHub Container Registry (GHCR)
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" \
-                                                                                            --password-stdin                                                                                  
-      - name: Push image to GHCR
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Push Image to ghcr
         run: |
+          echo "${{ github.actor }}"
           IMAGE="ghcr.io/${{ github.repository_owner }}/aiops-api"
           docker push "$IMAGE:latest"
-          docker push "$IMAGE:${{ github.sha }}"  
-              
+          docker push "$IMAGE:${{ github.sha }}"    

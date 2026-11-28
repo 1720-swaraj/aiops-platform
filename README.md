@@ -82,7 +82,17 @@ End-to-end DevOps / SRE portfolio project running at **$0 cost** on a local WSL2
   - `-o /out/report.txt` — Export report to a file.
 
 ---
+---
 
+## Day 2 Revision Notes (Phase 1 Part 2)
+
+### 7. Automated CI Build, Trivy Gate & GHCR (`.github/workflows/build-push-api.yml`)
+- **Path filtering (`paths:`):** Restricts the workflow to trigger only when files inside `app/api/**` or the workflow file itself change—prevents wasted CI minutes in monorepos when editing docs or other services.
+- **Manual triggers (`workflow_dispatch:`):** Adds a **"Run workflow"** button in the GitHub Actions UI so you can rebuild on demand without pushing a dummy commit.
+- **Least-privilege `permissions:` (`contents: read`, `packages: write`):** Grants GitHub's automatic, short-lived `GITHUB_TOKEN` only the exact rights needed to push to `ghcr.io`—zero static passwords or PATs stored in Secrets.
+- **Dual image tagging (`:latest` + `:${{ github.sha }}`):** Never rely only on `:latest` in production. Tagging with the Git commit SHA gives full traceability (which exact code commit is running) and clean rollbacks.
+- **Security gate placement:** Trivy runs **after `docker build` and before `docker push`** with `--exit-code 1 --ignore-unfixed --severity HIGH,CRITICAL`. If a fixable severe CVE exists, the pipeline fails and the vulnerable image never reaches GHCR.
+- **GHCR visibility:** Newly pushed GHCR packages default to **Private**. Switching visibility to **Public** (Package settings → Danger Zone) allows local Docker and Kubernetes clusters to pull images without configuring `imagePullSecrets`.
 ## Progress Tracker
 - [x] **Phase 0:** WSL2 (4 GB cap), native Docker Engine, repo setup, Gitleaks pre-commit + GitHub Actions CI
 - [x] **Phase 1 (Part 1):** FastAPI `api` service, multi-stage non-root `Dockerfile`, local Trivy scan

@@ -19,8 +19,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Build docker image
+      - name: Docker build image
         run: |
-          IMAGE = "ghcr.io/${{ github.repository_owner }}/aiops-api"
-          echo"${github.repository_owner}"
-          docker built -t "$IMAGE:latest" -t "$IMAGE:${{ github.sha }}" ./app/api
+          IMAGE="ghcr.io/${{ github.repository_owner }}/aiops-api"
+          echo "Image name is : $IMAGE"  

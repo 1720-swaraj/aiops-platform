@@ -21,5 +21,5 @@ jobs:
 
       - name: Build docker image
         run: |
-          IMAGE = "ghcr.io/${{ github.repository_owner }}/aiops-api"
-          echo"$IMAGE"
+          IMAGE="ghcr.io/${{ github.repository_owner }}/aiops-api"
+          echo "$IMAGE"
